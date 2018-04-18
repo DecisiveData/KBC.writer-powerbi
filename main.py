@@ -70,6 +70,9 @@ for filename in os.listdir(DEFAULT_FILE_INPUT):
             for row in reader:
                 if len(body) > 0:
                     body += ","
+                #did the extractor provide the JSON already?    
+                if row['JSON_POWERBI_DATA']:
+                    row = json.loads(row['JSON_POWERBI_DATA'], encoding='utf-8')
                 #truncate any values that are > 4000 chars
                 for key in row:
                     if len(str(row[key])) > 4000:
